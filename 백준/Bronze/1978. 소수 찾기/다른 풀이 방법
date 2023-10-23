@@ -1,3 +1,8 @@
+/*
+코드 출처 - 백준코딩 thsdnjst님 -
+https://www.acmicpc.net/source/36256732
+*/
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,6 +15,7 @@ public class Main {
         boolean[] decimal = new boolean[1001]; // 제시 된 문제에서 1,000 이하의 자연수라서 미리 생성 한걸로 보임
         decimal[0] = decimal[1] = true; // 0, 1은 소수 X
 
+        // 
         for(int i = 2; i <= Math.sqrt(decimal.length); i++){
             for(int j = i * i; j <= 1000; j = j + i){
                 if(!decimal[j])
