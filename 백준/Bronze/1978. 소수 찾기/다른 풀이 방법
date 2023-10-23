@@ -5,18 +5,22 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args)throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        boolean[] decimal = new boolean[1001];
-        decimal[0] = decimal[1] = true;
+        boolean[] decimal = new boolean[1001]; // 제시 된 문제에서 1,000 이하의 자연수라서 미리 생성 한걸로 보임
+        decimal[0] = decimal[1] = true; // 0, 1은 소수 X
+
         for(int i = 2; i <= Math.sqrt(decimal.length); i++){
             for(int j = i * i; j <= 1000; j = j + i){
                 if(!decimal[j])
                     decimal[j] = true;
             }
         }
+
         int n = Integer.parseInt(br.readLine());
         int count = 0;
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         for(int i = 0; i < n; i++){
             if(!decimal[Integer.parseInt(st.nextToken())])
                 count++;
