@@ -15,7 +15,7 @@ public class Main {
         boolean[] decimal = new boolean[1001]; // 제시 된 문제에서 1,000 이하의 자연수라서 미리 생성 한걸로 보임
         decimal[0] = decimal[1] = true; // 0, 1은 소수 X
 
-        // 
+        // 미리 배열에 소수 체크 후 플래그 저장
         for(int i = 2; i <= Math.sqrt(decimal.length); i++){
             for(int j = i * i; j <= 1000; j = j + i){
                 if(!decimal[j])
@@ -28,9 +28,16 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         for(int i = 0; i < n; i++){
+            // decimal[] = 0 일때 소수
             if(!decimal[Integer.parseInt(st.nextToken())])
                 count++;
         }
         System.out.println(count);
     }
 }
+
+================================= 풀이 =====================================
+- 소수를 구하는 방법 중 √N 이하의 자연수들로 모두 나누는 방법 사용
+
+해석 : 자연수 N이 주어졌을 때 해당 자연수 N은 p X q = N을 만족하며 둘 중 하나는 √N 보다 작거나 같다.
+여기서 √N 이하의 자연수 중에 나누어 떨어지는 수가 있다면 1과 N을 제외한 다른 자연수가 N 의 약수가 됨으로 이는 소수가 아니다.
