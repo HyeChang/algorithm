@@ -1,0 +1,27 @@
+/*
+	corjs835 님
+  풀이 : if문 비교 횟수를 각 X, Y 값의 최솟값을 구한 후 마지막으로 한번 비교 함으로써 if문 사용 횟수가 줄어듦
+*/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int x = Integer.parseInt(st.nextToken());
+        int y = Integer.parseInt(st.nextToken());
+        int w = Integer.parseInt(st.nextToken());
+        int h = Integer.parseInt(st.nextToken());
+
+        int xMin = Math.min(x, w-x);
+        int yMin = Math.min(y, h-y);
+
+        System.out.println(Math.min(xMin, yMin));
+    }
+}
