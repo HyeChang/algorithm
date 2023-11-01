@@ -1,19 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.StringTokenizer;
+// 속도 체크
 public class Main {
  
 	public static void main(String[] args) throws IOException {
 	
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		String[] A = br.readLine().split(" ");
-		
-		int x = Integer.parseInt(A[0]);
-		int y = Integer.parseInt(A[1]);
-		int w = Integer.parseInt(A[2]);
-		int h = Integer.parseInt(A[3]);
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int x = Integer.parseInt(st.nextToken());
+        int y = Integer.parseInt(st.nextToken());
+        int w = Integer.parseInt(st.nextToken());
+        int h = Integer.parseInt(st.nextToken());
 		
 		int resultWX = w - x;
 		int resultHY = h - y;
