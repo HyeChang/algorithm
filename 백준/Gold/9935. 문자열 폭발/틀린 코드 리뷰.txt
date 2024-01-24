@@ -1,1 +1,98 @@
+import java.io.IOException;
 
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		Stack<Character> resultStack = new Stack<>();
+		Stack<Character> inputStack = new Stack<>();
+		Stack<Character> boomStack = new Stack<>();
+		Stack<Character> tempStack = new Stack<>();
+		
+		boolean check = false;
+		int tempI = 0;
+		
+		String inputStr = sc.nextLine();
+		
+		for(int i = 0; i < inputStr.length(); i++) {
+			inputStack.push(inputStr.charAt(i));
+		}
+		
+		String boomStr = sc.nextLine();
+		
+		for(int i = 0; i < boomStr.length(); i++) {
+			boomStack.push(boomStr.charAt(i));
+		}
+		
+		while(true) {
+			// 1. 입력 문자와 boomStr 비교
+			for(int i = 0; i < inputStack.size(); i++) {
+				
+				// 첫번째 문장이 같으면 다음 두번째 문장 비교
+				if(boomStack.get(0) == inputStack.get(i)) {
+					
+					tempI = i;
+					
+					// 2. 입력 문자열과 boomStr 전체 비교
+					for(int b = 0; b < boomStack.size(); b++) {
+						
+						check = false;
+						
+						if(boomStack.get(b) == inputStack.get(tempI)) {
+							// 3. boomStr과 같다면 tempI 인덱스를 증가시켜 같은 부분 제외  
+							tempStack.push(boomStack.get(b));
+							tempI++;
+							// 비교 문자가 boomStr 문자열과 크기가 같으면 같은 문자열이므로 i 인덱스를 증가
+							if(boomStack.size() == (tempStack.size())) {
+								check = true;
+								tempStack.clear();
+								i = tempI;
+							}
+						} else {
+							tempStack.clear();
+							continue;
+						}
+						
+					} // boomStr과 비교 - for
+					
+				}
+				// 마지막 문자열 제외 시 결과 스텍에 저장 X
+				if(tempI < inputStack.size()) {
+					resultStack.push(inputStack.get(i));
+				} 
+				
+			} // 입력 문자 for
+			
+			if(!check) {
+				break;
+			}
+			inputStack.clear();
+			inputStack.addAll(resultStack);
+			resultStack.clear();
+			check = false;
+			tempI = 0;
+			
+		} // whlie
+				
+		if(resultStack.isEmpty()) {
+			System.out.println("FRULA");
+		} else {
+			for(Object i : resultStack) System.out.println(i); // 출력
+		}
+		
+	} // main
+	
+}
+
+- 틀린 이유 : 시간 초괴(제한 시간 2초)
+- 틀린 원인 : 
+1. Stack의 잘못된 사용
+2. Stack 끼리 복사를 위해서 사용한 방법이 실행 시간을 늘림
+3. for문의 과도한 사용
+
+- 잘못 생각한 이유
+초기에 문제를 보고 리스트, 링크리스트를 생각했었음. 근데 문제와 안 맞는다고 생각했으나 스택으로 변경하면서 리스트로 구현하는 생각을 하면서 해서 그런지 스택의 장점을 하나도 못 살렸음...
