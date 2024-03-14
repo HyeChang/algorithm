@@ -5,9 +5,9 @@ class Solution {
         
         int answer = 0;
         
-        int minePicksNum = minerals.length / 5;
+        int minePicksNum = (int)Math.ceil(minerals.length / 5.0);
         int allMineNum = minerals.length;
-        String[] picksOrder = new String[minePicksNum + 1];
+        String[] picksOrder = new String[minePicksNum];
         Arrays.fill(picksOrder, "stone");
         
         Map<String, Map<Integer, Integer>> mineNumMap = new HashMap<>();
@@ -46,14 +46,16 @@ class Solution {
          **/
         int diaPickNum = picks[0];
         int ironPickNum = picks[1];
+        int stonePickNum = picks[2];
         int mineMaxNum = 0;
         int allPicksNum = diaPickNum + ironPickNum; // 돌 제외 곡괭이 수
+        int diaNStonePicksNum = diaPickNum + stonePickNum; // 철 제외 곡괭이 수
         while(allPicksNum > 0) {
         	
-        	if(mineMaxNum > minePicksNum) break;
+        	if(mineMaxNum > minePicksNum || mineMaxNum >= minePicksNum) break;
         	
         	// 다이아 곡괭이
-        	while(diaPickNum > 0 && mineMaxNum <= minePicksNum){
+        	while(diaPickNum > 0 && mineMaxNum < minePicksNum){
         		int maxDiaMineVal = getMapVal(mineNumMap, "dia");
         		int maxDiaMineKey = getMapKey(mineNumMap, "dia");
         		int maxIronMineKey = getMapKey(mineNumMap, "iron");
@@ -77,7 +79,7 @@ class Solution {
         		
         	}
         	// 철 곡괭이
-        	while(ironPickNum > 0 && mineMaxNum <= minePicksNum){
+        	while(ironPickNum > 0 && mineMaxNum < minePicksNum){
         		int maxIronMineKey = getMapKey(mineNumMap, "iron");
         		int maxDiaMineVal = getMapVal(mineNumMap, "dia");
         		int maxDiaMineKey = getMapKey(mineNumMap, "dia");
@@ -147,7 +149,7 @@ class Solution {
     		}
     			
     	}
-        
+    	
         return answer;
         
     }
